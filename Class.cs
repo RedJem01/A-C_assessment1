@@ -43,11 +43,7 @@ namespace A_C_assessment1
             {
                 Road_1.Add(int.Parse(text[i]));
             }
-            Console.WriteLine("Road 1 (256):");
-            for (int i = 0; i <= Road_1.Count; i++)
-            {
-                Console.WriteLine(i + " ");
-            }
+
             path = Path.GetFullPath("Road_2_256.txt");
             text = File.ReadAllLines(path);
             for (int i = 0; i < text.Length; i++)
@@ -67,31 +63,39 @@ namespace A_C_assessment1
         {
 
         }
-		//public void sorting()
-  //      {
-  //          Console.WriteLine("Road 1 (256):");
-  //          for (int i = 0; i <= Road_1.Count; i++)
-  //          {
-  //              Console.WriteLine(i + " ");
-  //          }
-  //          for (int k = 0; k <= Road_1.Count - 2; k++)
-  //          {
-  //              for (int l = 0; l <= Road_1.Count - 2; k++)
-  //              {
-  //                  if (Road_1[l] > Road_1[l + 1])
-  //                  {
-  //                      int a = Road_1[l + 1];
-  //                      Road_1[l + 1] = Road_1[l];
-  //                      Road_1[l] = a;
+        public List<int> ascending(List<int> toSort)
+        {
+            int count = 0;
+            int n = toSort.Count;
+            for (int k = 0; k < n; k++)
+            {
+                //Console.WriteLine($"k{k}");
+                for (int l = 0; l < n; l++)
+                {
+                    //Console.WriteLine($"k{k}");
 
-  //                      Console.WriteLine("Road_1 (256) sorted:");
-  //                      for (int p = 0; p <= Road_1.Count; p++)
-  //                      {
-  //                          Console.WriteLine(p + " ");
-  //                      }
-  //                  }
-  //              }
-  //          }
-  //      }
-	}
+                    if (toSort[l] > toSort[k])
+                    {
+                        //Console.WriteLine($"k{k}");
+                        int a = toSort[k];
+                        toSort[k] = toSort[l];
+                        toSort[l] = a;
+                    }
+                    count += 1;
+                }
+            }
+            Console.WriteLine("Sorted in ascending numbers:");
+            foreach (int p in toSort)
+            {
+                Console.WriteLine(toSort[p]);
+            }
+            Console.WriteLine($"The 10th value of this list is {toSort[10]}");
+            Console.WriteLine($"This bubble sort took {count} steps.");
+            return toSort;
+        }
+        public List<int> descending(List<int> toSort)
+        {
+            return toSort;
+        }
+    }
 }
