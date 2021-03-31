@@ -64,37 +64,35 @@ namespace A_C_assessment1
 
         }
         public List<int> ascending(List<int> toSort)
-        {
+        { 
             int count = 0;
             int n = toSort.Count;
             for (int k = 0; k < n; k++)
             {
-                //Console.WriteLine($"k{k}");
-                for (int l = 0; l < n; l++)
+                for (int l = 0; l < n - 1; l++)
                 {
-                    //Console.WriteLine($"k{k}");
 
-                    if (toSort[l] > toSort[k])
+                    if (toSort[l] > toSort[l + 1])
                     {
-                        //Console.WriteLine($"k{k}");
-                        int a = toSort[k];
-                        toSort[k] = toSort[l];
+                        int a = toSort[l + 1];
+                        toSort[l + 1] = toSort[l];
                         toSort[l] = a;
                     }
                     count += 1;
                 }
             }
             Console.WriteLine("Sorted in ascending numbers:");
-            foreach (int p in toSort)
+            for (int p = 0; p < toSort.Count; p++)
             {
-                Console.WriteLine(toSort[p]);
+                Console.WriteLine(toSort[p] + " ");
             }
-            Console.WriteLine($"The 10th value of this list is {toSort[10]}");
+            Console.WriteLine($"The 10th value of this list is {toSort[9]}");
             Console.WriteLine($"This bubble sort took {count} steps.");
             return toSort;
         }
         public List<int> descending(List<int> toSort)
         {
+
             return toSort;
         }
     }
