@@ -16,7 +16,7 @@ namespace A_C_assessment1
                 Console.WriteLine(r.Road_1[i] + " ");
             }
             List<int> asortedRoad_1 = r.ascending(r.Road_1);
-            //List<int> dsortedRoad_1 = r.descending(r.Road_1);
+             r.descending(r.Road_1);
 
             //Console.WriteLine("Road 2 (256):");
             //foreach (int i in r.Road_2)
