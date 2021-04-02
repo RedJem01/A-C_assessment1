@@ -5,8 +5,8 @@ using System.Linq;
 
 namespace A_C_assessment1
 {
-	class Roads
-	{
+    class Roads
+    {
         private List<int> _Road_1;
         public List<int> Road_1
         {
@@ -34,7 +34,7 @@ namespace A_C_assessment1
             get { return _count; }
             set { _count = value; }
         }
-        
+
         public Roads()
         {
             Road_1 = new List<int>();
@@ -42,6 +42,10 @@ namespace A_C_assessment1
             Road_3 = new List<int>();
         }
 
+        public void output(List<int> list)
+        {
+            list.ForEach(Console.WriteLine);
+        }
         public void read()
         {
             string path = Path.GetFullPath("Road_1_256.txt");   //Gets the file path for the text file
@@ -51,7 +55,7 @@ namespace A_C_assessment1
                 Road_1.Add(int.Parse(text[i]));    //Adds each number in it to a list
             }
 
-            path = Path.GetFullPath("Road_2_256.txt"); 
+            path = Path.GetFullPath("Road_2_256.txt");
             text = File.ReadAllLines(path);
             for (int i = 0; i < text.Length; i++)
             {
@@ -66,13 +70,68 @@ namespace A_C_assessment1
             }
 
         }
-        public void search()
+    }
+    public class searching
+    {
+        Roads r = new Roads();
+        public string search(List<int> toSearch)
         {
+            Console.WriteLine("Please input a number.");
+            string num = Console.ReadLine();
+            int number = int.Parse(num);
+            int start = toSearch[0];
+            int stop = toSearch[toSearch.Count - 1];
+            string ret = binarySearch(toSearch, start, stop, number);
+            return ret;
+            
+        }
 
+        public string binarySearch(List<int> toSearch, int start, int stop, int number)
+        {
+            if (start > stop)
+            {
+                string error = "Error: The number you searched for is not in the list";
+                return error;
+            }
+            int mid = (start + stop) / 2;
+            if (number == toSearch[mid])
+            {
+                return mid.ToString();
+            }
+            else if (number < toSearch[mid])
+            {
+                return binarySearch(toSearch, start, mid - 1, number);
+            }
+            else
+            {
+                return binarySearch(toSearch, mid + 1, stop, number);
+            }
+        }
+    }
+
+    public class sorting
+    {
+        Roads r = new Roads();
+        public (List<int>, List<int>) sort(List<int> Road)
+        {
+            List<int> asortedRoad = ascending(Road);
+            Console.WriteLine("Sorted in ascending numbers:");
+            r.output(asortedRoad);
+            Console.WriteLine($"The 10th value of this list is {asortedRoad[9]}");
+            Console.WriteLine($"This bubble sort took {r.count} steps.");
+
+
+            List<int> dsortedRoad = descending(Road);
+            dsortedRoad.Reverse();
+            Console.WriteLine("Sorted in descending numbers:");
+            r.output(dsortedRoad);
+            Console.WriteLine($"The tenth value is {dsortedRoad[246]}");
+            Console.WriteLine($"This merge sort took {r.count} steps");
+            return (asortedRoad, dsortedRoad);
         }
         public List<int> ascending(List<int> toSort)
-        { 
-            int n = toSort.Count;    
+        {
+            int n = toSort.Count;
             for (int k = 0; k < n; k++)   //loops 256 (or the amount of numbers in the list) times
             {
                 for (int l = 0; l < n - 1; l++)    //Same as above but minus 1
@@ -84,19 +143,19 @@ namespace A_C_assessment1
                         toSort[l + 1] = toSort[l];   //Puts below into above
                         toSort[l] = a;    //Puts above into below
                     }  //^^^ essentially swaps the two numbers
-                    count += 1;   //Counting how many steps
+                    r.count += 1;   //Counting how many steps
                 }
             }
-
             return toSort;
         }
+
         public List<int> descending(List<int> toSort)    //merge sort to show the effectiveness between the two algorithms
         {
-            count += 1;
+            r.count += 1;
             List<int> left = new List<int>();   //Making two lists to split the list into 
             List<int> right = new List<int>();
-            
-            int n = toSort.Count;   
+
+            int n = toSort.Count;
             if (n <= 1)
             {
                 return toSort;
@@ -104,12 +163,11 @@ namespace A_C_assessment1
 
             int center = n / 2;    //Finds the center of the list
 
-
             for (int i = 0; i < center; i++)
             {
                 left.Add(toSort[i]);
             }
-                                                  //Splits the list into two halves
+            //Splits the list into two halves
             for (int i = center; i < n; i++)
             {
                 right.Add(toSort[i]);
@@ -119,7 +177,7 @@ namespace A_C_assessment1
             right = descending(right);
             return descendingp2(left, right);
 
-           
+
         }
         public List<int> descendingp2(List<int> left, List<int> right)
         {
@@ -150,16 +208,8 @@ namespace A_C_assessment1
                     right.Remove(right.First());
                 }
             }
-
             return all_together;
         }
-
-        public void output(List<int> list)
-        {
-            foreach (int i in list)
-            {
-                Console.WriteLine(list[i] + " ");    //Outputs list
-            }
-        }
     }
+    
 }

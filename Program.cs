@@ -4,64 +4,94 @@ using System.Collections.Generic;
 
 namespace A_C_assessment1
 {
+    class WrongInputException : Exception
+    {
+        public WrongInputException(string message) : base(message)
+        {
+
+        }
+    }
     class Program
     {
         static void Main(string[] args)
         {
             Roads r = new Roads();   //Creating a new object 
+            sorting so = new sorting();
+            searching se = new searching();
+
             r.read();
 
             Console.WriteLine("Road 1 (256):");
             r.output(r.Road_1);
 
-            List<int> asortedRoad_1 = r.ascending(r.Road_1);
-            Console.WriteLine("Sorted in ascending numbers:");
-            r.output(asortedRoad_1);
-            Console.WriteLine($"The 10th value of this list is {asortedRoad_1[9]}");
-            Console.WriteLine($"This bubble sort took {r.count} steps.");
-
-
-            List<int> dsortedRoad_1 = r.descending(r.Road_1);
-            dsortedRoad_1.Reverse();
-            Console.WriteLine("Sorted in descending numbers:");
-            r.output(dsortedRoad_1);
-            Console.WriteLine($"The tenth value is {dsortedRoad_1[246]}");
-            Console.WriteLine($"This merge sort took {r.count} steps");
-
-
+            (List<int> asortedRoad_1, List<int> dsortedRoad_1) = so.sort(r.Road_1);
 
             Console.WriteLine("Road 2 (256):");
             r.output(r.Road_2);
 
-            List<int> asortedRoad_2 = r.ascending(r.Road_2);
-            Console.WriteLine("Sorted in ascending numbers:");
-            r.output(asortedRoad_2);
-            Console.WriteLine($"The 10th value of this list is {asortedRoad_2[9]}");
-            Console.WriteLine($"This bubble sort took {r.count} steps.");
-
-
-            List<int> dsortedRoad_2 = r.descending(r.Road_2);
-            dsortedRoad_2.Reverse();
-            Console.WriteLine("Sorted in descending numbers:");
-            r.output(dsortedRoad_2);
-            Console.WriteLine($"The tenth value is {dsortedRoad_2[246]}");
-            Console.WriteLine($"This merge sort took {r.count} steps");
+            (List<int> asortedRoad_2, List<int> dsortedRoad_2) = so.sort(r.Road_2);
 
             Console.WriteLine("Road 3 (256):");
             r.output(r.Road_3);
 
-            List<int> asortedRoad_3 = r.ascending(r.Road_3);
-            Console.WriteLine("Sorted in ascending numbers:");
-            r.output(asortedRoad_3);
-            Console.WriteLine($"The 10th value of this list is {asortedRoad_3[9]}");
-            Console.WriteLine($"This bubble sort took {r.count} steps.");
+            (List<int> asortedRoad_3, List<int> dsortedRoad_3) = so.sort(r.Road_3);
 
-            List<int> dsortedRoad_3 = r.descending(r.Road_3);
-            dsortedRoad_3.Reverse();
-            Console.WriteLine("Sorted in descending numbers:");
-            r.output(dsortedRoad_3);
-            Console.WriteLine($"The tenth value is {dsortedRoad_3[246]}");
-            Console.WriteLine($"This merge sort took {r.count} steps");
+            try
+            {
+
+
+                Console.WriteLine("Which road did you want to look at?");
+                string choice = Console.ReadLine();
+                if (choice == "1")
+                {
+                    string found = se.search(asortedRoad_1);
+                    if (found == "Error: The number you searched for is not in the list")
+                    {
+                        Console.WriteLine(found);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"The number you searched for is in position {found}");
+                    }
+                }
+                else if (choice == "2")
+                {
+                    string found = se.search(asortedRoad_2);
+                    if (found == "Error: The number you searched for is not in the list")
+                    {
+                        Console.WriteLine(found);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"The number you searched for is in position {found}");
+                    }
+                }
+            
+                else if (choice == "3")
+                {
+                    string found = se.search(asortedRoad_3);
+                    if (found == "Error: The number you searched for is not in the list")
+                    {
+                        Console.WriteLine(found);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"The number you searched for is in position {found}");
+                    }
+                }
+            
+                else
+                {
+                    throw new WrongInputException("That is the wrong input. Please input 1, 2 or 3.");
+
+                }
+            }
+            catch (WrongInputException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
         }
     }
 }
+    
