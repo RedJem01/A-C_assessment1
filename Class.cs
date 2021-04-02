@@ -103,9 +103,9 @@ namespace A_C_assessment1
                 left.Add(toSort[i]);
             }
                                                   //Splits the list into two halves
-            for (int j = center; j < n; j++)
+            for (int i = center; i < n; i++)
             {
-                right.Add(toSort[j]);
+                right.Add(toSort[i]);
             }
 
             left = descending(left);
@@ -142,6 +142,12 @@ namespace A_C_assessment1
                     all_together.Add(right.First());
                     right.Remove(right.First());
                 }
+            }
+            all_together.Reverse();
+            Console.WriteLine("Sorted in descending numbers:");
+            for (int p = 0; p < all_together.Count; p++)
+            {
+                Console.WriteLine(all_together[p] + " ");    //Outputting the sorted list
             }
 
             return all_together;
