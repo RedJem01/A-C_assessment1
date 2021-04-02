@@ -27,6 +27,13 @@ namespace A_C_assessment1
             get { return _Road_3; }
             set { _Road_3 = value; }
         }
+
+        private int _count;
+        public int count
+        {
+            get { return _count; }
+            set { _count = value; }
+        }
         
         public Roads()
         {
@@ -65,7 +72,6 @@ namespace A_C_assessment1
         }
         public List<int> ascending(List<int> toSort)
         { 
-            int count = 0;   //To see how many steps the algorithm does
             int n = toSort.Count;    
             for (int k = 0; k < n; k++)   //loops 256 (or the amount of numbers in the list) times
             {
@@ -81,21 +87,22 @@ namespace A_C_assessment1
                     count += 1;   //Counting how many steps
                 }
             }
-            Console.WriteLine("Sorted in ascending numbers:");
-            for (int p = 0; p < toSort.Count; p++)
-            {
-                Console.WriteLine(toSort[p] + " ");    //Outputting the sorted list
-            }
-            Console.WriteLine($"The 10th value of this list is {toSort[9]}");  
-            Console.WriteLine($"This bubble sort took {count} steps.");
+
             return toSort;
         }
-        public List<int> descending(List<int> toSort)
+        public List<int> descending(List<int> toSort)    //merge sort to show the effectiveness between the two algorithms
         {
-            List<int> left = new List<int>(); 
+            count += 1;
+            List<int> left = new List<int>();   //Making two lists to split the list into 
             List<int> right = new List<int>();
+            
             int n = toSort.Count;   
-            int center = n / 2;
+            if (n <= 1)
+            {
+                return toSort;
+            }
+
+            int center = n / 2;    //Finds the center of the list
 
 
             for (int i = 0; i < center; i++)
@@ -143,14 +150,16 @@ namespace A_C_assessment1
                     right.Remove(right.First());
                 }
             }
-            all_together.Reverse();
-            Console.WriteLine("Sorted in descending numbers:");
-            for (int p = 0; p < all_together.Count; p++)
-            {
-                Console.WriteLine(all_together[p] + " ");    //Outputting the sorted list
-            }
 
             return all_together;
+        }
+
+        public void output(List<int> list)
+        {
+            foreach (int i in list)
+            {
+                Console.WriteLine(list[i] + " ");    //Outputs list
+            }
         }
     }
 }
