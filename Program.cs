@@ -47,10 +47,19 @@ namespace A_C_assessment1
             r.output(r.Road_3_);
             (List<int> asortedRoad_3_, List<int> dsortedRoad_3_) = so.sort(r.Road_3_);
 
-        
+            Console.WriteLine("Road 1 and Road 3 merged (256)");
+            List<int> merged256 = r.merge(asortedRoad_1, asortedRoad_3);
+            r.output(merged256);
+            (List<int> asortedmerge256, List<int> dsortedmerge256) = so.sort(merged256);
+
+            Console.WriteLine("Road 1 and Road 3 merged (2048)");
+            List<int> merged2048 = r.merge(asortedRoad_1_, asortedRoad_3_);
+            r.output(merged2048);
+            (List<int> asortedmerge2048, List<int> dsortedmerge2048) = so.sort(merged2048);
+
             try
             {
-                Console.WriteLine("Which road did you want to look at? 1,2,3 are 256 4,5,6 are 2048");
+                Console.WriteLine("Which road did you want to look at? 1,2,3 are 256 4,5,6 are 2048 7,8 are merged 256 and merged 2048");
                 string choice = Console.ReadLine();
                 if (choice == "1")
                 {
@@ -76,7 +85,7 @@ namespace A_C_assessment1
                         Console.WriteLine($"The number you searched for is in position {found}");
                     }
                 }
-            
+
                 else if (choice == "3")
                 {
                     string found = se.search(asortedRoad_3);
@@ -129,6 +138,32 @@ namespace A_C_assessment1
                     }
                 }
 
+                else if (choice == "7")
+                {
+                    string found = se.search(asortedmerge256);
+                    if (se.inPosition == false)
+                    {
+                        Console.WriteLine($"The number you searched for is not in the list. The closest number is {found} and it is in the position {se.position}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"The number you searched for is in position {found}");
+                    }
+                }
+
+                else if (choice == "8")
+                {
+                    string found = se.search(asortedmerge2048);
+                    if (se.inPosition == false)
+                    {
+                        Console.WriteLine($"The number you searched for is not in the list. The closest number is {found} and it is in the position {se.position}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"The number you searched for is in position {found}");
+                    }
+                }
+
                 else
                 {
                     throw new WrongInputException("That is the wrong input. Please input 1, 2 or 3.");
@@ -139,8 +174,6 @@ namespace A_C_assessment1
             {
                 Console.WriteLine(e.Message);
             }
-
-            merge();
         }
     }
 }

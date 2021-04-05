@@ -115,5 +115,21 @@ namespace A_C_assessment1
                 Road_3_.Add(int.Parse(text[i]));
             }
         }
+
+        public List<int> merge(List<int> list1, List<int> list2)
+        {
+            List<int> newList;
+            newList = new List<int>();
+            foreach (int i in list1)
+            {
+                newList.Add(i);
+            }
+            foreach (int i in list2)
+            {
+                newList.Add(i);
+            }
+            return newList;
+
+        }
     }
 }
