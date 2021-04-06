@@ -23,39 +23,31 @@ namespace A_C_assessment1
             r.read();
 
             //sorting files
-            Console.WriteLine("Road 1 (256):");
-            r.output(r.Road_1);
+            Console.WriteLine("Road 1 (256)");
             (List<int> asortedRoad_1, List<int> dsortedRoad_1) = so.sort(r.Road_1);
 
-            Console.WriteLine("Road 2 (256):");
-            r.output(r.Road_2);
+            Console.WriteLine("Road 2 (256)");
             (List<int> asortedRoad_2, List<int> dsortedRoad_2) = so.sort(r.Road_2);
 
-            Console.WriteLine("Road 3 (256):");
-            r.output(r.Road_3);
+            Console.WriteLine("Road 3 (256)");
             (List<int> asortedRoad_3, List<int> dsortedRoad_3) = so.sort(r.Road_3);
 
-            Console.WriteLine("Road 1 (2048):");
-            r.output(r.Road_1_);
+            Console.WriteLine("Road 1 (2048)");
             (List<int> asortedRoad_1_, List<int> dsortedRoad_1_) = so.sort(r.Road_1_);
 
-            Console.WriteLine("Road 2 (2048):");
-            r.output(r.Road_2_);
+            Console.WriteLine("Road 2 (2048)");
             (List<int> asortedRoad_2_, List<int> dsortedRoad_2_) = so.sort(r.Road_2_);
 
-            Console.WriteLine("Road 3 (2048):");
-            r.output(r.Road_3_);
+            Console.WriteLine("Road 3 (2048)");
             (List<int> asortedRoad_3_, List<int> dsortedRoad_3_) = so.sort(r.Road_3_);
 
             //merging and sorting merged files
             Console.WriteLine("Road 1 and Road 3 merged (256)");
             List<int> merged256 = r.merge(asortedRoad_1, asortedRoad_3);
-            r.output(merged256);
             (List<int> asortedmerge256, List<int> dsortedmerge256) = so.sort(merged256);
 
             Console.WriteLine("Road 1 and Road 3 merged (2048)");
             List<int> merged2048 = r.merge(asortedRoad_1_, asortedRoad_3_);
-            r.output(merged2048);
             (List<int> asortedmerge2048, List<int> dsortedmerge2048) = so.sort(merged2048);
 
 

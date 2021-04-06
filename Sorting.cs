@@ -13,16 +13,12 @@ namespace A_C_assessment1
             {
                 r.count = 0;
                 List<int> asortedRoad = bubbleSort(Road);          //Sorting in ascending order for 2048
-                Console.WriteLine("Sorted in ascending numbers:");
-                r.output(asortedRoad);
                 Console.WriteLine($"The 50th value of this list is {asortedRoad[49]}");
                 Console.WriteLine($"This bubble sort took {r.count} steps.");
 
                 r.count = 0;
                 List<int> dsortedRoad = mergeSort(Road);    //Sorting in descending order for 2048
                 dsortedRoad.Reverse();
-                Console.WriteLine("Sorted in descending numbers:");
-                r.output(dsortedRoad);
                 Console.WriteLine($"This merge sort took {r.count} steps");
                 return (asortedRoad, dsortedRoad);
             }
@@ -30,8 +26,6 @@ namespace A_C_assessment1
             {
                 r.count = 0;
                 List<int> asortedRoad = insertionSort(Road);          //Sorting in ascending order for 256 or merged
-                Console.WriteLine("Sorted in ascending numbers:");
-                r.output(asortedRoad);
                 Console.WriteLine($"The 10th value of this list is {asortedRoad[9]}");
                 Console.WriteLine($"This insertion sort took {r.count} steps.");
 
@@ -40,8 +34,6 @@ namespace A_C_assessment1
                 int stop = Road.Count - 1;
                 List<int> dsortedRoad = quickSort(Road, start, stop);    //Sorting in descending order for 256 or merged
                 dsortedRoad.Reverse();
-                Console.WriteLine("Sorted in descending numbers:");
-                r.output(dsortedRoad);
                 Console.WriteLine($"This quick sort took {r.count} steps");
                 return (asortedRoad, dsortedRoad);
             }
@@ -158,6 +150,7 @@ namespace A_C_assessment1
 
         public List<int> quickSort(List<int> toSort, int start, int stop)
         {
+            r.count += 1;
             if (stop > start)  //if the list hasnt been completely sorted
             {
                 int pivot = partition(toSort, start, stop);   //call partition 

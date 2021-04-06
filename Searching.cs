@@ -26,12 +26,12 @@ namespace A_C_assessment1
         {
             Console.WriteLine("Please input a number.");
             string num = Console.ReadLine();      //Getting number to find
-            int number = int.Parse(num);    
-            int start = 0;
-            int stop = toSearch.Count;
+            int number = int.Parse(num);
             r.count = 0;
             if (toSearch.Count == 256)
             {
+                int start = 0;
+                int stop = toSearch.Count;
                 string ret = binarySearch(toSearch, start, stop, number);   //calling search algorithm
                 Console.WriteLine($"This binary search took {r.count} steps");
                 return ret;
@@ -88,9 +88,10 @@ namespace A_C_assessment1
         public string interpolationSearch(List<int> toSearch, int number)
         {
             int low = 0;
-            int mid = -1;
+            int mid;
             int high = toSearch.Count - 1;
             int pos = -1;
+            inPosition = true;
 
             while (low <= high)
             {
@@ -99,6 +100,7 @@ namespace A_C_assessment1
                 if (toSearch[mid] == number)
                 {
                     pos = mid;
+                    break;
                 }
                 else
                 {
@@ -115,6 +117,7 @@ namespace A_C_assessment1
             if (pos == -1)
             {
                 pos = nearestToValue(toSearch, number);
+                inPosition = false;
             }
             return pos.ToString();
         }
