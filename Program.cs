@@ -47,6 +47,7 @@ namespace A_C_assessment1
             r.output(r.Road_3_);
             (List<int> asortedRoad_3_, List<int> dsortedRoad_3_) = so.sort(r.Road_3_);
 
+            //merging and sorting merged files
             Console.WriteLine("Road 1 and Road 3 merged (256)");
             List<int> merged256 = r.merge(asortedRoad_1, asortedRoad_3);
             r.output(merged256);
@@ -57,6 +58,8 @@ namespace A_C_assessment1
             r.output(merged2048);
             (List<int> asortedmerge2048, List<int> dsortedmerge2048) = so.sort(merged2048);
 
+
+            //searching for a num in files
             try
             {
                 Console.WriteLine("Which road did you want to look at? 1,2,3 are 256 4,5,6 are 2048 7,8 are merged 256 and merged 2048");
@@ -172,7 +175,7 @@ namespace A_C_assessment1
             }
             catch (WrongInputException e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.Message);   //If wrong input is inputted write an error message and exit
             }
         }
     }

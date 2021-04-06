@@ -9,29 +9,45 @@ namespace A_C_assessment1
         Roads r = new Roads();
         public (List<int>, List<int>) sort(List<int> Road)
         {
-            r.count = 0;
-            List<int> asortedRoad = ascending(Road);
-            Console.WriteLine("Sorted in ascending numbers:");
-            r.output(asortedRoad);
-            if (Road.Count == 256)
+            if (Road.Count == 2048)
             {
-                Console.WriteLine($"The 10th value of this list is {asortedRoad[9]}");
-            }
-            else if (Road.Count == 2048)
-            {
+                r.count = 0;
+                List<int> asortedRoad = bubbleSort(Road);          //Sorting in ascending order for 2048
+                Console.WriteLine("Sorted in ascending numbers:");
+                r.output(asortedRoad);
                 Console.WriteLine($"The 50th value of this list is {asortedRoad[49]}");
-            }
-            Console.WriteLine($"This bubble sort took {r.count} steps.");
+                Console.WriteLine($"This bubble sort took {r.count} steps.");
 
-            r.count = 0;
-            List<int> dsortedRoad = descending(Road);
-            dsortedRoad.Reverse();
-            Console.WriteLine("Sorted in descending numbers:");
-            r.output(dsortedRoad);
-            Console.WriteLine($"This merge sort took {r.count} steps");
-            return (asortedRoad, dsortedRoad);
+                r.count = 0;
+                List<int> dsortedRoad = mergeSort(Road);    //Sorting in descending order for 2048
+                dsortedRoad.Reverse();
+                Console.WriteLine("Sorted in descending numbers:");
+                r.output(dsortedRoad);
+                Console.WriteLine($"This merge sort took {r.count} steps");
+                return (asortedRoad, dsortedRoad);
+            }
+            else 
+            {
+                r.count = 0;
+                List<int> asortedRoad = insertionSort(Road);          //Sorting in ascending order for 256 or merged
+                Console.WriteLine("Sorted in ascending numbers:");
+                r.output(asortedRoad);
+                Console.WriteLine($"The 10th value of this list is {asortedRoad[9]}");
+                Console.WriteLine($"This insertion sort took {r.count} steps.");
+
+                r.count = 0;
+                int start = 0;
+                int stop = Road.Count - 1;
+                List<int> dsortedRoad = quickSort(Road, start, stop);    //Sorting in descending order for 256 or merged
+                dsortedRoad.Reverse();
+                Console.WriteLine("Sorted in descending numbers:");
+                r.output(dsortedRoad);
+                Console.WriteLine($"This quick sort took {r.count} steps");
+                return (asortedRoad, dsortedRoad);
+            }
+
         }
-        public List<int> ascending(List<int> toSort)
+        public List<int> bubbleSort(List<int> toSort)
         {
             int n = toSort.Count;
             for (int k = 0; k < n; k++)   //loops 256 (or the amount of numbers in the list) times
@@ -51,7 +67,7 @@ namespace A_C_assessment1
             return toSort;
         }
 
-        public List<int> descending(List<int> toSort)    //merge sort to show the effectiveness between the two algorithms
+        public List<int> mergeSort(List<int> toSort)    //merge sort to show the effectiveness between the two algorithms
         {
             r.count += 1;
             List<int> left = new List<int>();   //Making two lists to split the list into 
@@ -75,13 +91,13 @@ namespace A_C_assessment1
                 right.Add(toSort[i]);
             }
 
-            left = descending(left);
-            right = descending(right);
-            return descendingp2(left, right);
+            left = mergeSort(left);
+            right = mergeSort(right);
+            return mergeSortp2(left, right);
 
 
         }
-        public List<int> descendingp2(List<int> left, List<int> right)
+        public List<int> mergeSortp2(List<int> left, List<int> right)
         {
             List<int> all_together = new List<int>();
             while (left.Count > 0 || right.Count > 0)            //While one list or the other has one or more items
@@ -111,6 +127,80 @@ namespace A_C_assessment1
                 }
             }
             return all_together;
+        }
+
+        public List<int> insertionSort(List<int> toSort)
+        {
+            int numSorted = 1;
+            int index;
+            int n = toSort.Count - 1;
+
+            while (numSorted < n)   //While num of items sorted is less than num in list
+            {
+                r.count += 1;
+                int temp = toSort[numSorted];    
+                for (index = numSorted; index > 0; index--)   //going backwards from numsorted to 0
+                {
+                    if (temp < toSort[index - 1])   //If number in loop is bigger than the amount of numbers sorted 
+                    {
+                        toSort[index] = toSort[index - 1];     
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                toSort[index] = temp;   
+                numSorted++;    //Add to the numbers sorted
+            }
+            return toSort;
+        }
+
+        public List<int> quickSort(List<int> toSort, int start, int stop)
+        {
+            if (stop > start)  //if the list hasnt been completely sorted
+            {
+                int pivot = partition(toSort, start, stop);   //call partition 
+                if (pivot > 1) 
+                {
+                    quickSort(toSort, start, pivot - 1);  
+                }
+                if (pivot + 1 < stop)
+                {
+                    quickSort(toSort, pivot + 1, stop);
+                }
+            }
+            return toSort;
+        }
+
+        public int partition(List<int> toSort, int start, int stop)
+        {
+            int pivot = toSort[start];   //pivot = the start number
+            while (true)
+            {
+                while (toSort[start] < pivot)   //while start number < pivot
+                {
+                    start++;  //Add to start number
+                }
+                while (toSort[stop] > pivot)   //while stop number > pivot
+                {
+                    stop--;   //Minus from stop number
+                }
+                if (start < stop)   
+                {
+                    if (toSort[start] == toSort[stop])   
+                    {
+                        return stop;
+                    }
+                    int temp = toSort[start];
+                    toSort[start] = toSort[stop];   //Swapping the numbers at start and stop in list
+                    toSort[stop] = temp;
+                }
+                else    
+                {
+                    return stop;
+                }
+            }
         }
     }
 }

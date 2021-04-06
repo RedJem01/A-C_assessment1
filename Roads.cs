@@ -7,6 +7,7 @@ namespace A_C_assessment1
 {
     class Roads
     {
+        //Class attributes
         private List<int> _Road_1;
         public List<int> Road_1
         {
@@ -68,7 +69,7 @@ namespace A_C_assessment1
 
         public void output(List<int> list)
         {
-            list.ForEach(Console.WriteLine);
+            list.ForEach(Console.WriteLine);   //Outputting the list that is given line by line
         }
 
         public void read()
@@ -119,14 +120,14 @@ namespace A_C_assessment1
         public List<int> merge(List<int> list1, List<int> list2)
         {
             List<int> newList;
-            newList = new List<int>();
+            newList = new List<int>();    //Creating a new list
             foreach (int i in list1)
             {
-                newList.Add(i);
+                newList.Add(i);    //Adding the first list to the new list
             }
             foreach (int i in list2)
-            {
-                newList.Add(i);
+            { 
+                newList.Add(i);     //Adding the second list to the new list
             }
             return newList;
 

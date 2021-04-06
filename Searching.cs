@@ -6,6 +6,7 @@ namespace A_C_assessment1
 {
     public class searching
     {
+        //Class attributes
         private bool _inPosition;
         public bool inPosition
         {
@@ -20,18 +21,27 @@ namespace A_C_assessment1
             set { _position = value; }
         }
 
-        Roads r = new Roads();
+        Roads r = new Roads();    //Making a roads object
         public string search(List<int> toSearch)
         {
             Console.WriteLine("Please input a number.");
-            string num = Console.ReadLine();
-            int number = int.Parse(num);
+            string num = Console.ReadLine();      //Getting number to find
+            int number = int.Parse(num);    
             int start = 0;
             int stop = toSearch.Count;
             r.count = 0;
-            string ret = binarySearch(toSearch, start, stop, number);
-            Console.WriteLine($"This binary search took {r.count} steps");
-            return ret;
+            if (toSearch.Count == 256)
+            {
+                string ret = binarySearch(toSearch, start, stop, number);   //calling search algorithm
+                Console.WriteLine($"This binary search took {r.count} steps");
+                return ret;
+            }
+            else
+            {
+                string ret = interpolationSearch(toSearch, number);
+                Console.WriteLine($"This interpolation search took {r.count} steps");
+                return ret;
+            }
 
         }
 
@@ -40,45 +50,79 @@ namespace A_C_assessment1
             r.count += 1;
             inPosition = true;
             position = 0;
-            if (start > stop)
+            if (start > stop)     //If havent found the number by the end of the list
             {
-                int nearest = nearestToValue(toSearch, number);
-                inPosition = false;
+                int nearest = nearestToValue(toSearch, number);   //call function to find nearest value
+                inPosition = false;    //Number is not in list so its false
                 return nearest.ToString();
             }
-            if (number < toSearch[0])
+            if (number < toSearch[0])    //If the number is smaller than the first num in list
             {
-                string pos = (toSearch[0].ToString());
-                inPosition = false;
+                string pos = (toSearch[0].ToString());    //make pos the first number
+                inPosition = false;   
                 position = 1;
                 return pos;
             }
-            else if (number > toSearch[toSearch.Count - 1])
+            else if (number > toSearch[toSearch.Count - 1])   //if number is bigger than biggest num in list
             {
-                string pos = (toSearch[toSearch.Count - 1].ToString());
+                string pos = (toSearch[toSearch.Count - 1].ToString()); //make pos last num
                 inPosition = false;
                 position = toSearch.Count;
                 return pos;
             }
-            int mid = (start + stop) / 2;
-            if (number == toSearch[mid])
+            int mid = (start + stop) / 2;  //Middle of list
+            if (number == toSearch[mid])  //if num is in middle
             {
                 return mid.ToString();
             }
-            else if (number < toSearch[mid])
+            else if (number < toSearch[mid])   //smaller thn middle
             {
-                return binarySearch(toSearch, start, mid - 1, number);
+                return binarySearch(toSearch, start, mid - 1, number);  //Rerun algorithm until it is middle
             }
-            else
+            else  
             {
                 return binarySearch(toSearch, mid + 1, stop, number);
             }
         }
 
+        public string interpolationSearch(List<int> toSearch, int number)
+        {
+            int low = 0;
+            int mid = -1;
+            int high = toSearch.Count - 1;
+            int pos = -1;
+
+            while (low <= high)
+            {
+                r.count += 1;
+                mid = (low + ((high - low) / (toSearch[high] - toSearch[low])) * (number - toSearch[low]));
+                if (toSearch[mid] == number)
+                {
+                    pos = mid;
+                }
+                else
+                {
+                    if (toSearch[mid] < number)
+                    {
+                        low = mid + 1;
+                    }
+                    else
+                    {
+                        high = mid - 1;
+                    }
+                }
+            }
+            if (pos == -1)
+            {
+                pos = nearestToValue(toSearch, number);
+            }
+            return pos.ToString();
+        }
+
         public int nearestToValue(List<int> toSearch, int number)
         {
             int closest = toSearch.Aggregate((x, y) => Math.Abs(x - number) < Math.Abs(y - number) ? x : y);
-            position = toSearch.IndexOf(closest);
+            position = toSearch.IndexOf(closest);   //Find the position of num in list
             return closest;
         }
     }
