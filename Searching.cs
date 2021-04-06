@@ -90,16 +90,31 @@ namespace A_C_assessment1
             int low = 0;
             int mid;
             int high = toSearch.Count - 1;
-            int pos = -1;
+            string pos = "-1";
             inPosition = true;
 
             while (low <= high)
             {
                 r.count += 1;
-                mid = (low + ((high - low) / (toSearch[high] - toSearch[low])) * (number - toSearch[low]));
+                mid = low + ((number - toSearch[low]) * (high - low)) / (toSearch[high] - toSearch[low]);
+                if (number < toSearch[0])    //If the number is smaller than the first num in list
+                {
+                    pos = (toSearch[0].ToString());    //make pos the first number
+                    inPosition = false;
+                    position = 1;
+                    return pos;
+                }
+                else if (number > toSearch[toSearch.Count - 1])   //if number is bigger than biggest num in list
+                {
+                    pos = (toSearch[toSearch.Count - 1].ToString()); //make pos last num
+                    inPosition = false;
+                    position = toSearch.Count;
+                    return pos;
+                }
+
                 if (toSearch[mid] == number)
                 {
-                    pos = mid;
+                    pos = mid.ToString();
                     break;
                 }
                 else
@@ -114,12 +129,12 @@ namespace A_C_assessment1
                     }
                 }
             }
-            if (pos == -1)
+            if (pos == "-1")
             {
-                pos = nearestToValue(toSearch, number);
+                pos = nearestToValue(toSearch, number).ToString();
                 inPosition = false;
             }
-            return pos.ToString();
+            return pos;
         }
 
         public int nearestToValue(List<int> toSearch, int number)

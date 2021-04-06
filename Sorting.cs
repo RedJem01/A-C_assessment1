@@ -24,17 +24,19 @@ namespace A_C_assessment1
             }
             else 
             {
-                r.count = 0;
-                List<int> asortedRoad = insertionSort(Road);          //Sorting in ascending order for 256 or merged
-                Console.WriteLine($"The 10th value of this list is {asortedRoad[9]}");
-                Console.WriteLine($"This insertion sort took {r.count} steps.");
-
-                r.count = 0;
                 int start = 0;
                 int stop = Road.Count - 1;
-                List<int> dsortedRoad = quickSort(Road, start, stop);    //Sorting in descending order for 256 or merged
+                List<int> dsortedRoad = quickSort(Road, start, stop);          //Sorting in descending order for 256 or merged
                 dsortedRoad.Reverse();
-                Console.WriteLine($"This quick sort took {r.count} steps");
+                Console.WriteLine($"This quick sort took {r.count} steps.");
+
+                r.count = 0;
+                List<int> asortedRoad = insertionSort(Road);    //Sorting in ascending order for 256 or merged
+                Console.WriteLine($"The 10th value of this list is {asortedRoad[9]}");
+                Console.WriteLine($"This insertion sort took {r.count} steps");
+                r.count = 0;
+
+
                 return (asortedRoad, dsortedRoad);
             }
 
@@ -123,28 +125,21 @@ namespace A_C_assessment1
 
         public List<int> insertionSort(List<int> toSort)
         {
-            int numSorted = 1;
-            int index;
-            int n = toSort.Count - 1;
-
-            while (numSorted < n)   //While num of items sorted is less than num in list
+            int j, temp;
+            for (int i = 1; i <= toSort.Count - 1; i++)
             {
-                r.count += 1;
-                int temp = toSort[numSorted];    
-                for (index = numSorted; index > 0; index--)   //going backwards from numsorted to 0
+                temp = toSort[i];
+                j = i - 1;
+                while (j >= 0 && toSort[j] > temp)
                 {
-                    if (temp < toSort[index - 1])   //If number in loop is bigger than the amount of numbers sorted 
-                    {
-                        toSort[index] = toSort[index - 1];     
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    r.count += 1;
+                    toSort[j + 1] = toSort[j];
+                    j--;
                 }
-                toSort[index] = temp;   
-                numSorted++;    //Add to the numbers sorted
+                toSort[j + 1] = temp;
             }
+
+
             return toSort;
         }
 
