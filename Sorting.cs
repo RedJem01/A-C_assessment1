@@ -148,7 +148,7 @@ namespace A_C_assessment1
             r.count += 1;
             if (stop > start)  //if the list hasnt been completely sorted
             {
-                int pivot = partition(toSort, start, stop);   //call partition 
+                int pivot = quickSortp2(toSort, start, stop);   //call partition 
                 if (pivot > 1) 
                 {
                     quickSort(toSort, start, pivot - 1);  
@@ -161,7 +161,7 @@ namespace A_C_assessment1
             return toSort;
         }
 
-        public int partition(List<int> toSort, int start, int stop)
+        public int quickSortp2(List<int> toSort, int start, int stop)
         {
             int pivot = toSort[start];   //pivot = the start number
             while (true)

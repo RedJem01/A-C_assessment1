@@ -67,10 +67,10 @@ namespace A_C_assessment1
             Road_3_ = new List<int>();
         }
 
-        public void output(List<int> list)
-        {
-            list.ForEach(Console.WriteLine);   //Outputting the list that is given line by line
-        }
+        //public void output(List<int> list)
+        //{
+        //    list.ForEach(Console.WriteLine);   //Outputting the list that is given line by line
+        //}
 
         public void read()
         {
