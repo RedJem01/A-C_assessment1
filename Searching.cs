@@ -28,7 +28,7 @@ namespace A_C_assessment1
             string num = Console.ReadLine();      //Getting number to find
             int number = int.Parse(num);
             r.count = 0;
-            if (toSearch.Count == 256)
+            if (toSearch.Count == 2048)
             {
                 int start = 0;
                 int stop = toSearch.Count;
@@ -93,7 +93,7 @@ namespace A_C_assessment1
             string pos = "-1";
             inPosition = true;
 
-            while (low <= high)
+            while (low < high)
             {
                 r.count += 1;
                 mid = low + ((number - toSearch[low]) * (high - low)) / (toSearch[high] - toSearch[low]);
